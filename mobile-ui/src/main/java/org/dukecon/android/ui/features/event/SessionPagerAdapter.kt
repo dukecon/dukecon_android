@@ -12,7 +12,7 @@ internal class SessionPagerAdapter : PagerAdapter() {
         return view == `object`
     }
 
-    var dates: List<OffsetDateTime> = arrayListOf()
+    var dates: List<OffsetDateTime> = emptyList()
     var context: Context? = null
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

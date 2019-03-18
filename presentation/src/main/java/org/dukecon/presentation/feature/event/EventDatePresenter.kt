@@ -14,8 +14,19 @@ class EventDatePresenter @Inject constructor(val conferenceRepository: Conferenc
 
     private lateinit var view: EventDateListContract.View
 
+    private val onRefreshListener: () -> Unit = this::refreshDataFromRepo
+
     override fun onAttach(view: EventDateListContract.View) {
+        conferenceRepository.onRefreshListeners += onRefreshListener
         this.view = view
+        refreshDataFromRepo()
+    }
+
+    override fun onDetach() {
+        conferenceRepository.onRefreshListeners -= onRefreshListener
+    }
+
+    private fun refreshDataFromRepo() {
         launch {
             val dates = conferenceRepository.getEventDates()
 
@@ -28,8 +39,5 @@ class EventDatePresenter @Inject constructor(val conferenceRepository: Conferenc
                 }
             }
         }
-    }
-
-    override fun onDetach() {
     }
 }

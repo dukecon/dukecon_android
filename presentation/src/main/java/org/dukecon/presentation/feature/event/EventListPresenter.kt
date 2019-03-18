@@ -36,9 +36,12 @@ class EventListPresenter @Inject constructor(private val currentTimeProvider: Cu
     private lateinit var view: EventListContract.View
     private lateinit var date: OffsetDateTime
 
+    private var showFavoritesOnly: Boolean = false
+
     override fun setDate(conferenceDay: OffsetDateTime, showFavoritesOnly: Boolean) {
 
         this.date = conferenceDay
+        this.showFavoritesOnly = showFavoritesOnly
         launch {
             val events = conferenceRepository.getEvents(date.dayOfMonth)
             val filtered = events.filter {
@@ -53,7 +56,17 @@ class EventListPresenter @Inject constructor(private val currentTimeProvider: Cu
     }
 
     private fun refreshDataFromRepo() {
-
+        launch {
+            val events = conferenceRepository.getEvents(date.dayOfMonth)
+            val filtered = events.filter {
+                if (showFavoritesOnly) {
+                    (it.favorite.selected)
+                } else {
+                    true
+                }
+            }
+            handleGetEventsSuccess(filtered)
+        }
     }
 
     private fun findCurrentSessionIndex(sessions: List<Event>): Int {

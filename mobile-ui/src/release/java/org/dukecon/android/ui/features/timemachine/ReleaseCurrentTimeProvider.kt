@@ -1,10 +1,11 @@
 package org.dukecon.android.ui.features.timemachine
 
 import org.dukecon.domain.features.time.CurrentTimeProvider
+import org.threeten.bp.OffsetDateTime
 
 class ReleaseCurrentTimeProvider : CurrentTimeProvider {
+
     override fun currentTimeMillis(): Long {
-        val instant = Instant.ofEpochMilli(currentTimeMillis())
-        return instant.atZone(ZoneId.systemDefault()).toOffsetDateTime()
+        return OffsetDateTime.now().toInstant().toEpochMilli()
     }
 }

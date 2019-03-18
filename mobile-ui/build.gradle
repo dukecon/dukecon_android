@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'io.fabric'
-apply from: '../config/git.gradle'
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -45,6 +44,8 @@ android {
     defaultConfig {
         minSdkVersion globalConfiguration["androidMinSdkVersion"]
         targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode buildConfig.version.code
+        versionName buildConfig.version.name
         multiDexEnabled = false
         testInstrumentationRunner "org.buffer.android.boilerplate.ui.test.TestRunner"
         vectorDrawables.useSupportLibrary = true
@@ -82,7 +83,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFile 'proguard-release-app.pro'
-            signingConfig signingConfigs.doagconRelease
+            signingConfig signingConfigs.javalandRelease
         }
     }
 
@@ -118,32 +119,21 @@ android {
         javaland {
             dimension "dukecon"
             applicationIdSuffix ".javaland"
-
-            versionCode 3
-            versionName gitVersionName
         }
+
         apexconn {
             dimension "dukecon"
             applicationIdSuffix ".apexconnect"
-
-            versionCode 3
-            versionName gitVersionName
         }
 
         apachecon {
             dimension "dukecon"
             applicationIdSuffix ".apachecon"
-
-            versionCode 3
-            versionName gitVersionName
         }
 
         doagcon {
             dimension "dukecon"
             applicationIdSuffix ".doag"
-
-            versionCode 5
-            versionName gitVersionName
         }
     }
 }
