@@ -40,6 +40,10 @@
                 android:value=".features.main.MainActivity" />
         </activity>
 
+        <receiver
+            android:name="org.dukecon.android.ui.features.notification.NotificationPublisher"
+            android:exported="false"/>
+
         <service
             android:name="org.dukecon.android.ui.features.login.browser.KeepAliveService"
             android:exported="true" />

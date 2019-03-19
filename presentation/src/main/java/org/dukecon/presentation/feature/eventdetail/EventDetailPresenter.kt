@@ -2,6 +2,7 @@ package org.dukecon.presentation.feature.eventdetail
 
 import kotlinx.coroutines.launch
 import org.dukecon.domain.aspects.auth.AuthManager
+import org.dukecon.domain.features.notifications.NotificationProvider
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.model.Event
 import org.dukecon.domain.model.Favorite
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 class EventDetailPresenter @Inject constructor(
         private val conferenceRepository: ConferenceRepository,
+        private val notificationProvider: NotificationProvider,
         private val tokensStorage: TokensStorage,
         private val speakerMapper: SpeakerMapper,
         private val eventsMapper: EventMapper,
@@ -70,7 +72,19 @@ class EventDetailPresenter @Inject constructor(
         if (found != null) {
             this.currentFavouriteStatus = found.selected
             view.setIsFavorite(found.selected)
+            launch {
+                val session = conferenceRepository.getEvent(sessionId)
+                if (found.selected) {
+                    notificationProvider.scheduleFeedbackNotification(session)
+                } else {
+                    notificationProvider.unscheduleFeedbackNotification(session)
+                }
+            }
         } else {
+            launch {
+                val session = conferenceRepository.getEvent(sessionId)
+                notificationProvider.unscheduleFeedbackNotification(session)
+            }
             this.currentFavouriteStatus = false
             view.setIsFavorite(false)
         }

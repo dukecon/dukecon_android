@@ -25,6 +25,7 @@ import org.dukecon.android.ui.features.networking.AndroidNetworkUtils
 import org.dukecon.android.ui.features.networking.ConnectionStateMonitor
 import org.dukecon.android.ui.features.networking.LolipopConnectionStateMonitor
 import org.dukecon.android.ui.features.networking.NetworkOfflineChecker
+import org.dukecon.android.ui.features.notification.LocalNotificationProvider
 import org.dukecon.data.repository.ConferenceDataCache
 import org.dukecon.data.repository.EventRemote
 import org.dukecon.data.service.OAuthService
@@ -33,6 +34,7 @@ import org.dukecon.data.source.OAuthConfiguration
 import org.dukecon.domain.aspects.auth.AuthManager
 import org.dukecon.domain.aspects.twitter.TwitterLinks
 import org.dukecon.domain.features.networking.NetworkUtils
+import org.dukecon.domain.features.notifications.NotificationProvider
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.oauth.api.code.OauthApi
 import org.dukecon.oauth.api.refresh.RefreshOauthApi
@@ -245,6 +247,11 @@ open class ApplicationModule {
     @Provides
     fun provideAuthManager(dukeconAuthManager: DukeconAuthManager): AuthManager {
         return dukeconAuthManager
+    }
+
+    @Provides
+    @Singleton fun provideNotificationProvider(application: Application): NotificationProvider {
+        return LocalNotificationProvider(application)
     }
 }
 

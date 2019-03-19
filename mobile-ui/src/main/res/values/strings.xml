@@ -32,5 +32,8 @@
     <string name="login">login</string>
     <string name="event_list_room_duration">%s %s</string>
     <string name="action_favorites">Favorites</string>
+    <string name="feedback_note_channel">Session Feedback</string>
+    <string name="note_feedback_title">%1$s complete</string>
+    <string name="note_feedback_msg">Don\'t forget to submit feedback.</string>
 
 </resources>

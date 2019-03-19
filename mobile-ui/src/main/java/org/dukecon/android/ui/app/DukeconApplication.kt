@@ -1,7 +1,6 @@
 package org.dukecon.android.ui.app
 
 import android.app.Application
-import android.content.Context
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.dukecon.android.ui.BuildConfig
 import org.dukecon.android.ui.injection.ApplicationComponent
