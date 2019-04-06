@@ -26,6 +26,8 @@ class EventDatePresenter @Inject constructor(val conferenceRepository: Conferenc
         conferenceRepository.onRefreshListeners -= onRefreshListener
     }
 
+    private var initial: Boolean = true
+
     private fun refreshDataFromRepo() {
         launch {
             val dates = conferenceRepository.getEventDates()
@@ -35,7 +37,10 @@ class EventDatePresenter @Inject constructor(val conferenceRepository: Conferenc
             } else {
                 view.let {
                     it.showSessionDates(dates)
-                    it.scrollToCurrentDay()
+                    if (initial) {
+                        it.scrollToCurrentDay()
+                        initial = false
+                    }
                 }
             }
         }

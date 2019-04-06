@@ -1,6 +1,8 @@
 package org.dukecon.presentation.feature.eventdetail
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.dukecon.domain.aspects.auth.AuthManager
 import org.dukecon.domain.features.oauth.TokensStorage
 import org.dukecon.domain.model.Event
@@ -39,9 +41,10 @@ class EventDetailPresenter @Inject constructor(
 
     override fun toggleFavorite() {
         launch {
-            val favorites =
-                    conferenceRepository.saveFavorite(
-                            Favorite(sessionId, 0, !currentFavouriteStatus))
+            val favorites = withContext(Dispatchers.IO) {
+                conferenceRepository.saveFavorite(
+                        Favorite(sessionId, 0, !currentFavouriteStatus))
+            }
             handleSetFavoriteSuccess(favorites)
         }
     }

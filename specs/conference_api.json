@@ -204,7 +204,7 @@
         "tags": [
           "conferences"
         ],
-        "summary": "submit feedback to talk",
+        "summary": "submit favorites",
         "description": "",
         "operationId": "sendFavorites",
         "parameters": [
@@ -269,17 +269,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Speaker"
-                  }
-                }
-              }
-            }
+            "description": "successful operation"
           }
         },
         "requestBody": {

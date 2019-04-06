@@ -203,7 +203,6 @@ ext {
             okHttp               : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             okHttpLogger         : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
             androidThreeTen      : "com.jakewharton.threetenabp:threetenabp:${androidThreeTenVersion}",
-            threeTenConverters   : "com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers:${threeTenConverterVersion}",
             retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitConverter    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             browser              : "androidx.browser:browser:${androidxBrowserVersion}",

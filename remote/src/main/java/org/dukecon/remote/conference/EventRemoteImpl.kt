@@ -7,6 +7,7 @@ import org.dukecon.android.api.model.Speaker
 import org.dukecon.data.model.*
 import org.dukecon.data.repository.EventRemote
 import org.dukecon.remote.conference.mapper.*
+import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -53,7 +54,7 @@ class EventRemoteImpl @Inject constructor(
         if (response.isSuccessful) {
             return getFavorites()
         } else {
-            throw  Throwable()
+            throw  IOException()
         }
     }
 
@@ -68,7 +69,7 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     override fun getKeycloak(): KeycloakEntity {
@@ -80,7 +81,7 @@ class EventRemoteImpl @Inject constructor(
                 return keycloakEntityMapper.mapFromRemote(keycloak)
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     override fun submitFeedback(feedback: FeedbackEntity): Any {
@@ -93,7 +94,7 @@ class EventRemoteImpl @Inject constructor(
         if (response.isSuccessful) {
             return Any()
         } else {
-            throw  Throwable()
+            throw  IOException()
         }
     }
 
@@ -111,7 +112,7 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     private fun emptySpeakerEntity(): Speaker {
@@ -134,7 +135,7 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     private fun emptyEntity(): Event {
@@ -155,7 +156,7 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     override fun getSpeakers(): List<SpeakerEntity> {
@@ -169,7 +170,7 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 
     /**
@@ -186,6 +187,6 @@ class EventRemoteImpl @Inject constructor(
                 }
             }
         }
-        throw Throwable()
+        throw IOException()
     }
 }

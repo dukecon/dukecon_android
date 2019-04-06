@@ -49,7 +49,9 @@ class SetCustomdateTimeReceiver : BroadcastReceiver() {
         if (sharedText != null) {
             logger.info { sharedText }
             try {
-                currentTimeProvider.setCustomMillis(OffsetDateTime.parse(sharedText).toInstant().toEpochMilli())
+                val now = OffsetDateTime.now()
+                val instant = OffsetDateTime.parse(sharedText).toInstant()
+                currentTimeProvider.setCustomMillis(instant.toEpochMilli())
             } catch (e: IllegalArgumentException) {
                 // ignore
             }

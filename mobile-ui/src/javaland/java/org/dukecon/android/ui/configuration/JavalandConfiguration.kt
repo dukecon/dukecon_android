@@ -6,7 +6,7 @@ import java.util.*
 
 class JavalandConfiguration(val application: Application) : ConferenceConfiguration {
     override val supportsFeedback: Boolean
-        get() = false
+        get() = true
     override val speakerAvatarUrl: String
         get() = baseUrl + "speaker/images/"
     override val baseUrl: String

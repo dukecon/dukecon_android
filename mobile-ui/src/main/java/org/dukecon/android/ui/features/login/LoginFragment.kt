@@ -40,14 +40,10 @@ class LoginFragment : Fragment(), CoroutineScope {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        context!!.getComponent<MainComponent>().loginComponent().inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        context?.getComponent<MainComponent>()?.loginComponent()?.inject(this)
         mJob = Job()
 
         val token = tokensStorage.getToken()

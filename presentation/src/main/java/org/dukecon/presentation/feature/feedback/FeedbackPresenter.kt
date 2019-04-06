@@ -1,6 +1,8 @@
 package org.dukecon.presentation.feature.feedback
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.dukecon.domain.model.Feedback
 import org.dukecon.domain.repository.ConferenceRepository
 import org.dukecon.presentation.CoroutinePresenter
@@ -31,7 +33,10 @@ class FeedbackPresenter @Inject constructor(private val conferenceRepository: Co
         val sessionId = this.sessionId
         if (sessionId != null) {
             launch {
-                conferenceRepository.submitFeedback(Feedback(sessionId, overall, comment))
+                withContext(Dispatchers.IO) {
+                    conferenceRepository.submitFeedback(Feedback(sessionId, overall, comment))
+                }
+                view?.dismiss()
             }
         }
     }

@@ -48,7 +48,7 @@ android {
         versionName buildConfig.version.name
         multiDexEnabled = false
         testInstrumentationRunner "org.buffer.android.boilerplate.ui.test.TestRunner"
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = false
     }
 
     signingConfigs {
@@ -185,8 +185,7 @@ dependencies {
     implementation mobileUiDependencies.browser
     implementation mobileUiDependencies.androidxCore
     implementation mobileUiDependencies.androidThreeTen
-    implementation mobileUiDependencies.threeTenConverters
-    
+
     testImplementation mobileUiTestDependencies.kotlinJUnit
 
     kapt mobileUiDependencies.daggerCompiler
