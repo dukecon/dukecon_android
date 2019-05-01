@@ -1,3 +1,17 @@
+@Library('jenkins-library@master') _
+
+properties(
+    [
+        buildDiscarder(
+            logRotator(
+                daysToKeepStr: '5',
+                numToKeepStr: '5'
+            )
+        ),
+	disableConcurrentBuilds()
+    ]
+)
+
 // Every jenkins file should start with either a Declarative or Scripted Pipeline entry point.
 node {
     //Utilizing a try block so as to make the code cleaner and send slack notification in case of any error
@@ -41,5 +55,6 @@ node {
         currentBuild.result = "FAILED"
         throw e
     } finally {
+        sendNotification currentBuild.result
     }
 }
