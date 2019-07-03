@@ -19,13 +19,32 @@ class EventRemoteImpl @Inject constructor(
         private val conferenceApi: ConferencesApi,
         private val conferenceId: String,
         private val entityMapper: EventEntityMapper,
+        private val conferenceMapper: ConferenceEntityMapper,
         private val feedbackEntityMapper: FeedbackEntityMapper,
         private val speakersEntityMapper: SpeakerEntityMapper,
         private val roomEntityMapper: RoomEntityMapper,
         private val keycloakEntityMapper: KeycloakEntityMapper,
         private val metaDataEntityMapper: MetaDataEntityMapper,
-        private val favoritesEntityMapper:FavoritesEntityMapper
+        private val favoritesEntityMapper: FavoritesEntityMapper
 ) : EventRemote {
+    override fun getConference(): ConferenceEntity {
+        try {
+            val call = conferenceApi.conference
+            val response = call.execute()
+            if (response.isSuccessful) {
+                if (response.body() != null) {
+                    val resp = response.body()
+                    if (resp != null) {
+                        return conferenceMapper.mapFromRemote(resp)
+                    }
+                }
+            }
+        } catch (ex: MalformedJsonException) {
+            // TODO app proper error handling for user logged out
+            return ConferenceEntity(listOf(), listOf(), listOf())
+        }
+        return ConferenceEntity(listOf(), listOf(), listOf())
+    }
 
     override fun getFavorites(): List<FavoriteEntity> {
         try {

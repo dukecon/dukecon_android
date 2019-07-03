@@ -1,0 +1,75 @@
+plugins {
+    id 'java'
+    id 'org.openapi.generator'
+}
+
+openApiGenerate {
+    generatorName = "java"
+    inputSpec = "$project.rootDir/specs/conference_static_api.json".toString()
+    outputDir = "$buildDir/java".toString()
+    modelPackage = 'org.dukecon.android.api.model'
+    invokerPackage = 'org.dukecon.android.api.service'
+    apiPackage = 'org.dukecon.android.api'
+    library = 'retrofit2'
+
+    configOptions = [
+            booleanGetterPrefix: "is",
+            serializableModel  : false,
+            dateLibrary        : 'threetenbp'
+    ]
+}
+
+task buildOauthCodeClient(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+    generatorName = "java"
+    inputSpec = "$project.rootDir/specs/oauth_api.json".toString()
+    outputDir = "$buildDir/java".toString()
+    modelPackage = 'org.dukecon.oauth.api.code.model'
+    invokerPackage = 'org.dukecon.oauth.api.code.service'
+    apiPackage = 'org.dukecon.oauth.api.code'
+    library = 'retrofit2'
+
+    configOptions = [
+            booleanGetterPrefix: "is",
+            serializableModel  : false,
+            dateLibrary        : 'threetenbp'
+    ]
+}
+
+task buildRefreshTokenClient(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+    generatorName = "java"
+    inputSpec = "$project.rootDir/specs/refresh_token.json".toString()
+    outputDir = "$buildDir/java".toString()
+    modelPackage = 'org.dukecon.oauth.api.refresh.model'
+    invokerPackage = 'org.dukecon.oauth.api.refresh.service'
+    apiPackage = 'org.dukecon.oauth.api.refresh'
+    library = 'retrofit2'
+
+    configOptions = [
+            booleanGetterPrefix: "is",
+            serializableModel  : false,
+            dateLibrary        : 'threetenbp'
+    ]
+}
+
+sourceSets.main.java.srcDirs += ["$buildDir/java/src/main/java"]
+
+compileJava.dependsOn tasks.openApiGenerate, buildOauthCodeClient, buildRefreshTokenClient
+
+dependencies {
+
+    def apiDependencies = rootProject.ext.apiDependencies
+    def apiTestDependencies = rootProject.ext.apiTestDependencies
+
+    compileOnly apiDependencies.swaggerAnnotations
+    implementation apiDependencies.retrofit
+    implementation apiDependencies.retrofitGsonConverter
+    implementation apiDependencies.retrofitScalarsConverter
+    implementation apiDependencies.jsonFire
+    compileOnly apiDependencies.threeTen
+    
+    implementation(apiDependencies.oltuOAuth) {
+        exclude group: 'org.apache.oltu.oauth2', module: 'org.apache.oltu.oauth2.common'
+    }
+
+    testImplementation apiTestDependencies.junit
+}

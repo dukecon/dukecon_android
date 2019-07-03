@@ -5,7 +5,7 @@ import org.dukecon.data.ext.toOffsetDateTime
 import org.dukecon.data.model.EventEntity
 import javax.inject.Inject
 
-open class EventEntityMapper @Inject constructor() : EntityMapper<Event, EventEntity> {
+class EventEntityMapper @Inject constructor() : EntityMapper<Event, EventEntity> {
 
     override fun mapFromRemote(type: org.dukecon.android.api.model.Event): EventEntity {
         return EventEntity(

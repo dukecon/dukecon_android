@@ -1,0 +1,25 @@
+@startuml
+interface  CurrentTimeProvider {
+    fun currentTimeMillis(): Long
+}
+
+
+node Debug {
+  interface CustomizableCurrentTimeProvider extends CurrentTimeProvider {
+    fun setCustomMillis(value: Long)
+  }
+
+  class BroadcastReceiver
+  class SetCustomdateTimeReceiver extends BroadcastReceiver
+  class  DebugCurrentTimeProvider implements CustomizableCurrentTimeProvider
+  SetCustomdateTimeReceiver *-- DebugCurrentTimeProvider
+}
+
+node Release {
+  class  ReleaseCurrentTimeProvider implements CurrentTimeProvider {
+    DateTime.now()
+  }
+}
+
+
+@enduml

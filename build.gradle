@@ -52,3 +52,5 @@ allprojects {
         targetCompatibility = JavaVersion.VERSION_1_7
     }
 }
+
+apply from: file('gradle/projectDependencyGraph.gradle')

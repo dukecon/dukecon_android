@@ -31,7 +31,7 @@
         android:layout_marginRight="10dp"
         android:scaleType="fitCenter"
         android:padding="@dimen/_1_BU"
-        android:src="@drawable/logo_dark"
+        android:src="@drawable/ac_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

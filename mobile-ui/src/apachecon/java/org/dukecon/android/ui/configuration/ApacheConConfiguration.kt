@@ -9,7 +9,7 @@ class ApacheConConfiguration(val application: Application) : ConferenceConfigura
     override val speakerAvatarUrl: String
         get() = baseUrl + "speaker/images/"
     override val baseUrl: String
-        get() = "https://apachecon.dukecon.org/acna/2018/rest/"
+        get() = "https://www.apachecon.com/acna19/s/rest/"
     override val conferenceId: String
-        get() = "acna18"
+        get() = ""
 }

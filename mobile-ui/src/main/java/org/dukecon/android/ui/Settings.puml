@@ -1,0 +1,37 @@
+@startuml
+
+
+package Common {
+
+interface Settings {
+    +putBoolean
+    +getBoolean
+    +putString
+    +getString
+}
+
+package AndroidTarget {
+}
+
+package iOSTarget {
+class NSUserDefaults {
+}
+
+class _PlatformSettings implements Settings {
+}
+_PlatformSettings *-- NSUserDefaults
+}
+}
+
+package AndroidApp {
+class SharedPreferences {
+}
+
+class PlatformSettings implements Settings {
+}
+PlatformSettings *-- SharedPreferences
+}
+
+
+
+@enduml

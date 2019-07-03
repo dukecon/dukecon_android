@@ -1,7 +1,7 @@
 apply plugin: 'kotlin'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
     def remoteDependencies = rootProject.ext.remoteDependencies
@@ -24,6 +24,6 @@ dependencies {
     testImplementation remoteTestDependencies.assertj
 
     compile project(':data')
-    compile project(':dukecon-api')
+    compile project(':dukecon-static-api')
 
 }

@@ -1,1 +1,2 @@
 include ':dukecon-api', ':data', ':domain', ':presentation', ':mobile-ui', ':cache', ':remote'
+include ':dukecon-static-api'

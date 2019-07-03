@@ -12,6 +12,10 @@ import javax.inject.Inject
  */
 open class EventRemoteDataStore @Inject constructor(private val eventRemote: EventRemote) :
         EventDataStore {
+    override fun getConference(): ConferenceEntity {
+        return eventRemote.getConference()
+    }
+
     override fun getMetaData(): MetaDataEntity {
         return eventRemote.getMetaData()
     }

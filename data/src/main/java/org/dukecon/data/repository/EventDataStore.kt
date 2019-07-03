@@ -24,4 +24,6 @@ interface EventDataStore {
     fun getKeycloak(): KeycloakEntity
 
     fun getMetaData(): MetaDataEntity
+
+    fun getConference():ConferenceEntity
 }

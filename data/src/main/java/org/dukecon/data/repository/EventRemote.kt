@@ -3,6 +3,7 @@ package org.dukecon.data.repository
 import org.dukecon.data.model.*
 
 interface EventRemote {
+    fun getConference():ConferenceEntity
     fun getEvents(): List<EventEntity>
     fun getSpeakers(): List<SpeakerEntity>
     fun getRooms(): List<RoomEntity>
